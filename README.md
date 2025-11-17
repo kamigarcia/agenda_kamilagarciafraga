@@ -1,7 +1,7 @@
 # 📱 Agenda Kamila Garcia Fraga
 
 Aplicativo desenvolvido em **Flutter** para gerenciar tarefas e compromissos diários de forma prática e organizada.  
-Este projeto faz parte da avaliação da disciplina de **Desenvolvimento Mobile** do curso de **Análise e Desenvolvimento de Sistemas**.
+Este projeto faz parte da avaliação da disciplina de **DESENVOLVIMENTO PARA DISPOSITIVOS MÓVEIS** do curso de **Análise e Desenvolvimento de Sistemas**.
 
 ---
 
