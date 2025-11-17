@@ -18,10 +18,88 @@ class AgendaKamilaGarciaFraga extends StatelessWidget {
           bodyMedium: TextStyle(color: Colors.grey),
         ),
       ),
-      home: LoginPage(),
+      home: TelaInicial(),
     );
   }
 }
+
+// ─────────────────────────────────────────────
+// 🌸 TELA INICIAL (BOAS-VINDAS)
+// ─────────────────────────────────────────────
+
+class TelaInicial extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.pink[50],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.favorite, size: 90, color: Colors.pinkAccent),
+            const SizedBox(height: 20),
+
+            const Text(
+              "Bem-vinda 💖",
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+                color: Colors.pink,
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            const Text(
+              "Desenvolvido por:",
+              style: TextStyle(fontSize: 20),
+            ),
+
+            const Text(
+              "Kamila Garcia ❤️",
+              style: TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
+                color: Colors.pinkAccent,
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            const Text(
+              "RA: 1180294",
+              style: TextStyle(fontSize: 20, color: Colors.black87),
+            ),
+
+            const SizedBox(height: 40),
+
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.pinkAccent,
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 18),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => LoginPage()),
+                );
+              },
+              child: const Text(
+                "Começar",
+                style: TextStyle(fontSize: 22, color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ─────────────────────────────────────────────
+// 🔐 LOGIN / CADASTRO
+// ─────────────────────────────────────────────
 
 class LoginPage extends StatefulWidget {
   @override
@@ -43,29 +121,36 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.favorite, color: Colors.black, size: 80),
+              const Icon(Icons.favorite, color: Colors.white, size: 80),
+
               const SizedBox(height: 20),
-              Text(
-                'Bem-vinda, Kamila Garcia 💖 RA: 1180294',
+
+              const Text(
+                'Bem-vinda, Kamila Garcia 💖',
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 26,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
+
+              const SizedBox(height: 8),
+
+              const Text(
+                'RA: 1180294',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
+              ),
+
               const SizedBox(height: 30),
+
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
-                      blurRadius: 6,
-                      offset: Offset(0, 4),
-                    ),
-                  ],
                 ),
                 child: Column(
                   children: [
@@ -92,10 +177,9 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       child: Text(
                         _isLogin ? 'Entrar' : 'Cadastrar',
-                        style: TextStyle(color: Colors.pinkAccent),
+                        style: const TextStyle(color: Colors.pinkAccent),
                       ),
                     ),
-                    const SizedBox(height: 10),
                     TextButton(
                       onPressed: () {
                         setState(() {
@@ -106,7 +190,7 @@ class _LoginPageState extends State<LoginPage> {
                         _isLogin
                             ? 'Não tem conta? Cadastre-se'
                             : 'Já tem conta? Faça login',
-                        style: TextStyle(color: Colors.grey[700]),
+                        style: const TextStyle(color: Colors.black87),
                       ),
                     ),
                   ],
@@ -119,6 +203,10 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+
+// ─────────────────────────────────────────────
+// 📅 CALENDÁRIO
+// ─────────────────────────────────────────────
 
 class CalendarPage extends StatefulWidget {
   @override
@@ -164,9 +252,7 @@ class _CalendarPageState extends State<CalendarPage> {
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.black,
-            ),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
             onPressed: () {
               Navigator.push(
                 context,
@@ -186,8 +272,13 @@ class _CalendarPageState extends State<CalendarPage> {
   }
 }
 
+// ─────────────────────────────────────────────
+// 📝 LISTA DE TAREFAS
+// ─────────────────────────────────────────────
+
 class TaskListPage extends StatefulWidget {
   final DateTime selectedDate;
+
   const TaskListPage({required this.selectedDate});
 
   @override
@@ -208,7 +299,7 @@ class _TaskListPageState extends State<TaskListPage> {
     _tasks.sort((a, b) {
       if (a['done'] && !b['done']) return 1;
       if (!a['done'] && b['done']) return -1;
-      return a['name'].toString().toLowerCase().compareTo(b['name'].toString().toLowerCase());
+      return a['name'].toLowerCase().compareTo(b['name'].toLowerCase());
     });
   }
 
@@ -259,6 +350,7 @@ class _TaskListPageState extends State<TaskListPage> {
   @override
   Widget build(BuildContext context) {
     String dateFormatted = DateFormat('dd/MM/yyyy').format(widget.selectedDate);
+
     return Scaffold(
       backgroundColor: Colors.pinkAccent,
       appBar: AppBar(
@@ -268,11 +360,17 @@ class _TaskListPageState extends State<TaskListPage> {
           style: const TextStyle(color: Colors.pinkAccent),
         ),
         centerTitle: true,
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 16),
+            child: Icon(Icons.list_alt, color: Colors.pinkAccent),
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black,
         onPressed: _showAddTaskDialog,
-        child: const Icon(Icons.add, color: Colors.pinkAccent),
+        child: const Icon(Icons.add, size: 32, color: Colors.pinkAccent),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
